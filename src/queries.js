@@ -1,28 +1,49 @@
 import { gql } from 'apollo-boost';
 
-export const GET_NAMES = gql`
+export const GET_TODOS = gql`
   query {
-    allNameses {
+    allTodos {
       id
-      name
+      title
+      completed
     }
   }
 `;
 
-export const ADD_NAME = gql`
-  mutation createNames($name: String!) {
-    createNames(name: $name) {
-      name
-      id
+export const LOGIN = gql`
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
     }
   }
 `;
 
-export const DELETE_NAME = gql`
-  mutation deleteNames($id: ID!) {
-    deleteNames(id: $id) {
-      name
+export const ADD_TODO = gql`
+  mutation createTodo($title: String!) {
+    createTodos(title: $title) {
+      title
       id
+      completed
+    }
+  }
+`;
+
+export const DELETE_TODO = gql`
+  mutation deleteTodo($id: ID!) {
+    deleteTodos(id: $id) {
+      title
+      id
+      completed
+    }
+  }
+`;
+
+export const DONE_TODO = gql`
+  mutation doneTodo($id: ID!) {
+    doneTodos(id: $id) {
+      title
+      id
+      completed
     }
   }
 `;

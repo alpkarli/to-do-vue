@@ -17,7 +17,7 @@ Vue.config.productionTip = false;
 }); */
 
 const client = new ApolloClient({
-  uri: 'https://api.graph.cool/simple/v1/cjexem1he3let0153tpc5ftu1',
+  uri: 'https://fakerql.com/graphql',
 });
 
 const apolloProvider = new VueApollo({

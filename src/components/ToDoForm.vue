@@ -1,7 +1,7 @@
 <template>
   <b-form v-on:submit.prevent="onSubmit">
-      <label for="name">Name:</label>
-      <b-form-input v-model.trim="person"
+      <label for="title">Title:</label>
+      <b-form-input v-model.trim="title"
                   type="text"
                   placeholder="Enter todo">
       </b-form-input>
@@ -10,33 +10,33 @@
 </template>
 
 <script>
-import { GET_NAMES, ADD_NAME } from '../queries';
+import { GET_TODOS, ADD_TODO } from '../queries';
 
 export default {
   name: 'ToDoForm',
   data() {
     return {
-      person: '',
+      title: '',
       error: null,
     };
   },
   methods: {
     onSubmit() {
-      const name = this.person;
-      this.person = '';
+      const title = this.title;
+      this.title = '';
       this.$apollo
         .mutate({
-          mutation: ADD_NAME,
+          mutation: ADD_TODO,
           variables: {
-            name,
+            title,
           },
-          update: (cache, { data: { createNames } }) => {
-            const { allNameses } = cache.readQuery({ query: GET_NAMES });
+          update: (cache, { data: { createTodos } }) => {
+            const { allTodos } = cache.readQuery({ query: GET_TODOS });
 
             cache.writeQuery({
-              query: GET_NAMES,
+              query: GET_TODOS,
               data: {
-                allNameses: allNameses.concat(createNames),
+                allTodos: allTodos.concat(createTodos),
               },
             });
           },
@@ -44,15 +44,15 @@ export default {
             __typename: 'Mutation',
             createNames: {
               id: -1,
-              __typename: 'Name',
-              name,
+              __typename: 'Title',
+              title,
             },
           },
         })
         .catch((error) => {
           console.error(error);
-          this.person = name;
-          this.error = `There has been a problem adding ${name} :(`;
+          this.title = title;
+          this.error = `There has been a problem adding ${title} :(`;
         });
     },
   },

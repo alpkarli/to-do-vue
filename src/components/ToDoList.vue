@@ -5,45 +5,43 @@
       <span v-else-if='error'>An error occured</span>
 
       <section v-if='data'>
-        <b-list-group v-if='data.allNameses.length'>
+        <b-list-group v-if='data.allTodos.length'>
             <b-list-group-item class='d-flex justify-content-between align-items-center'
-            :key='name.id' v-for='name in data.allNameses' >
-              {{name.name}}
-              <b-badge variant='primary' class='withPointer'
-               pill v-on:click='deleteName(name.id)'>x</b-badge>
+            :key='todo.id' v-for='todo in data.allTodos' >
+              {{todo.title}}
             </b-list-group-item>
         </b-list-group>
 
-        <span v-else>No names, oh no :(</span>
+        <span v-else>No todos, oh no :(</span>
       </section>
     </template>
   </ApolloQuery>
 </template>
 
 <script>
-import { GET_NAMES, DELETE_NAME } from '../queries';
+import { GET_TODOS, DELETE_TODO } from '../queries';
 
 export default {
   name: 'ToDoList',
   data() {
     return {
-      query: GET_NAMES,
+      query: GET_TODOS,
     };
   },
   methods: {
     deleteName(id) {
       this.$apollo
         .mutate({
-          mutation: DELETE_NAME,
+          mutation: DELETE_TODO,
           variables: {
             id,
           },
-          update: (cache, { data: { deleteNames } }) => {
-            const { allNameses } = cache.readQuery({ query: GET_NAMES });
+          update: (cache, { data: { deleteTodos } }) => {
+            const { allTodos } = cache.readQuery({ query: GET_TODOS });
             cache.writeQuery({
-              query: GET_NAMES,
+              query: GET_TODOS,
               data: {
-                allNameses: allNameses.filter(n => n.id !== deleteNames.id),
+                allTodos: allTodos.filter(n => n.id !== deleteTodos.id),
               },
             });
           },

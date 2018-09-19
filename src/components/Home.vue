@@ -1,11 +1,18 @@
 <template>
   <div>
-    <to-do-form />
-    <ToDoList />
+    <h1 class='todoMessage'>{{msg}}</h1>
+    <div v-if='!login'>
+      <LoginForm />
+    </div>
+    <div v-if='login'>
+      <to-do-form />
+      <ToDoList />
+    </div>
   </div>
 </template>
 
 <script>
+import LoginForm from './LoginForm';
 import ToDoList from './ToDoList';
 import ToDoForm from './ToDoForm';
 
@@ -14,10 +21,12 @@ export default {
   components: {
     ToDoList,
     ToDoForm,
+    LoginForm,
   },
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App',
+      msg: 'To Do Manager',
+      login: false,
     };
   },
 };
