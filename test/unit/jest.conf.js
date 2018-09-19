@@ -7,13 +7,15 @@ module.exports = {
     'json',
     'vue',
   ],
-  testURL: 'http://localhost',
+  testURL: 'http://localhost:8080',
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
   transform: {
-    '^.+\\.js$': '<rootDir>/node_modules/babel-jest',
-    '.*\\.(vue)$': '<rootDir>/node_modules/vue-jest',
+    '^.+\\.vue$': 'vue-jest',
+    '^.+\\.jsx?$': 'babel-jest',
+    '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$':
+      'jest-transform-stub',
   },
   testPathIgnorePatterns: [
     '<rootDir>/test/e2e',

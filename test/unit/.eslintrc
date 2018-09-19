@@ -1,7 +1,15 @@
 {
-  "env": { 
+  "env": {
     "jest": true
   },
-  "globals": { 
+  "globals": {
+    "vue-jest": {
+      "resources": {
+        "scss": [
+          "./node_modules/package/_mixins.scss",
+          "./src/assets/css/globals.scss"
+        ]
+      }
+    }
   }
 }

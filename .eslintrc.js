@@ -15,6 +15,10 @@ module.exports = {
   plugins: [
     'vue'
   ],
+  globals: {
+    "localStorage": true,
+    "fetch": true
+  },
   // check if imports actually resolve
   settings: {
     'import/resolver': {
@@ -46,6 +50,7 @@ module.exports = {
     }],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-console': 'off'
+    'no-console': 'off',
+    'no-new': 0
   }
 }

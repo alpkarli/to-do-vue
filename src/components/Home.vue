@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class='todoMessage'>{{msg}}</h1>
+    <p class='h1 mb-4'><span class='title'>{{msg}}</span></p>
     <div v-if='!login'>
       <LoginForm />
     </div>
@@ -25,15 +25,21 @@ export default {
   },
   data() {
     return {
-      msg: 'To Do Manager',
-      login: false,
+      msg: 'ToDo List',
+      login: typeof localStorage.token !== 'undefined',
     };
   },
 };
+
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss" scoped>
+<!-- Add 'scoped' attribute to limit CSS to this component only -->
+<style lang='scss' scoped>
+
+.title {
+  text-shadow: 0px 0px 32px rgba(0, 0, 0, 0.5),
+  0px 0px 1px rgba(0, 0, 0, 1);
+}
 
 h1, h2 {
   font-weight: normal;

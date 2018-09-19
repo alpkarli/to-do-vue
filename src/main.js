@@ -4,17 +4,13 @@ import VueApollo from 'vue-apollo';
 import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
+import Es6Promise from 'es6-promise';
+import 'babel-polyfill';
 import App from './App';
 import router from './router';
 
 Vue.config.productionTip = false;
-
-/* eslint-disable no-new */
-/* new Vue({
-  el: '#app',
-  router,
-  render: h => h(App),
-}); */
+Es6Promise.polyfill();
 
 const client = new ApolloClient({
   uri: 'https://fakerql.com/graphql',

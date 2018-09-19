@@ -1,12 +1,17 @@
 <template>
-  <b-form v-on:submit.prevent="onSubmit">
-      <label for="title">Title:</label>
-      <b-form-input v-model.trim="title"
-                  type="text"
-                  placeholder="Enter todo">
-      </b-form-input>
-    <div v-if='error'>{{error}}</div>
-  </b-form>
+  <b-container>
+    <b-row align-h='center' class='mb-4' >
+      <b-col cols='6' align-self='center' >
+        <b-form v-on:submit.prevent='onSubmit'>
+            <b-form-input v-model.trim='title'
+                        type='text'
+                        placeholder='Enter todo'>
+            </b-form-input>
+          <div v-if='error'>{{error}}</div>
+        </b-form>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
@@ -23,27 +28,30 @@ export default {
   methods: {
     onSubmit() {
       const title = this.title;
+      const completed = false;
       this.title = '';
       this.$apollo
         .mutate({
           mutation: ADD_TODO,
           variables: {
             title,
+            completed,
           },
-          update: (cache, { data: { createTodos } }) => {
+          update: (cache, { data: { createTodo } }) => {
             const { allTodos } = cache.readQuery({ query: GET_TODOS });
 
             cache.writeQuery({
               query: GET_TODOS,
               data: {
-                allTodos: allTodos.concat(createTodos),
+                allTodos: allTodos.concat(createTodo),
               },
             });
           },
           optimisticResponse: {
             __typename: 'Mutation',
-            createNames: {
+            createTodo: {
               id: -1,
+              completed,
               __typename: 'Title',
               title,
             },
@@ -60,7 +68,7 @@ export default {
 </script>
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
-<style lang="scss" scoped>
+<style lang='scss' scoped>
 h1, h2 {
   font-weight: normal;
 }

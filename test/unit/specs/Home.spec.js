@@ -5,7 +5,7 @@ describe('Home.vue', () => {
   it('should render correct contents', () => {
     const Constructor = Vue.extend(Home);
     const vm = new Constructor().$mount();
-    expect(vm.$el.querySelector('.todoMessage h1').textContent)
-      .toEqual('To Do Manager');
+    expect(vm.$el.querySelector('.title').textContent)
+      .toEqual('ToDo List');
   });
 });

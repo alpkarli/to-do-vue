@@ -1,26 +1,28 @@
 <template>
-  <b-form @submit="onSubmit">
-    <b-form-group
-                label="Email address:">
-      <b-form-input
-                    type="email"
-                    v-model.trim="form.email"
-                    required
-                    placeholder="Enter email">
-      </b-form-input>
-    </b-form-group>
-    <b-form-group
-                label="Password:">
-      <b-form-input
-                    type="password"
-                    v-model.trim="form.password"
-                    required
-                    placeholder="Enter password">
-      </b-form-input>
-    </b-form-group>
-    <b-button type="submit" variant="primary">Submit</b-button>
-    <div v-if='error'>{{error}}</div>
-  </b-form>
+  <b-container>
+    <b-row align-h='center' >
+      <b-col cols='6' align-self='center' >
+        <b-form @submit='onSubmit'>
+          <b-form-group label='Email address:'>
+            <b-form-input
+            type='email'
+            v-model.trim='form.email'
+            required
+            placeholder='Enter email' />
+          </b-form-group>
+          <b-form-group label='Password:'>
+            <b-form-input
+            type='password'
+            v-model.trim='form.password'
+            required
+            placeholder='Enter password' />
+          </b-form-group>
+          <b-button  type='submit' class='submit'>Submit</b-button>
+          <div v-if='error'>{{error}}</div>
+        </b-form>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
@@ -40,7 +42,6 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      console.log(JSON.stringify(this.form));
       const email = this.form.email;
       const password = this.form.password;
       this.$apollo
@@ -53,6 +54,7 @@ export default {
           update: (cache, { data: { login } }) => {
             if (login.token) {
               this.$parent.login = true;
+              localStorage.token = login.token;
             }
           },
         })
@@ -66,7 +68,7 @@ export default {
 </script>
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
-<style lang="scss" scoped>
+<style lang='scss' scoped>
 h1, h2 {
   font-weight: normal;
 }

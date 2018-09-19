@@ -19,28 +19,8 @@ export const LOGIN = gql`
 `;
 
 export const ADD_TODO = gql`
-  mutation createTodo($title: String!) {
-    createTodos(title: $title) {
-      title
-      id
-      completed
-    }
-  }
-`;
-
-export const DELETE_TODO = gql`
-  mutation deleteTodo($id: ID!) {
-    deleteTodos(id: $id) {
-      title
-      id
-      completed
-    }
-  }
-`;
-
-export const DONE_TODO = gql`
-  mutation doneTodo($id: ID!) {
-    doneTodos(id: $id) {
+  mutation createTodo($title: String!, $completed: Boolean) {
+    createTodo(title: $title, completed: $completed) {
       title
       id
       completed
