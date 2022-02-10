@@ -22,7 +22,7 @@
     "es6-promise": "^4.2.5",
     "graphql": "^14.0.2",
     "jest-transform-stub": "^1.0.0",
-    "node-sass": "^4.9.3",
+    "node-sass": "^7.0.0",
     "sass-loader": "^7.1.0",
     "vue": "^2.5.2",
     "vue-apollo": "^3.0.0-beta.25",
